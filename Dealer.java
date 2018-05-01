@@ -20,10 +20,9 @@ public class Dealer implements User {
         return true;
     }
 
-    
-
     @Override
     public int getHandValue() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
 }
