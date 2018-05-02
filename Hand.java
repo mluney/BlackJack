@@ -1,22 +1,35 @@
 package blackjack;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Hand {
 
     
-    private int handValue = 0;
-    private ArrayList<Card> cards;
+    private int handValue;
+    private LinkedList<Card> cards;
 
-    public Hand(ArrayList<Card> cards){
-        this.cards = cards;
+    /**
+     * 
+     */
+    public Hand(){
+        cards = new LinkedList<Card>();
+        handValue = 0;
+        /*this.cards = cards;
         for(int i = 0; i < cards.size(); i++){
             this.handValue += cards.get(i).getValue();
-        }
+        }*/
     }
     
+    public LinkedList getCardsInHand(){
+        return cards;
+    }
+    /**
+     * 
+     * @param card 
+     */
     public void addCard(Card card) {
         cards.add(card);
+        handValue+= card.getValue();
         if(handValue > 21){
             for(int i = 0; i < cards.size(); i++){
                 if(cards.get(i).equals("Ace") && cards.get(i).getValue() == 11){
@@ -29,12 +42,12 @@ public class Hand {
                 bust();
             }
         }
-        if(card.getName().equals("Ace") && handValue > 10){
+        /*if(card.getName().equals("Ace") && handValue > 10){
             card.setValue(1);
             handValue += 1;
         } else {
             handValue += card.getValue();
-        }
+        }*/
     }
 
     public int getValue() {
@@ -43,6 +56,5 @@ public class Hand {
     
     public void bust(){
         System.out.printf("Current hand value = %d. Bust!", handValue);
-        
     }
 }

@@ -36,9 +36,9 @@ public class Deck {
             Card randomCard = cards.get(randomInt);
             if (!shuffledDeck.contains(randomCard)) {
                 shuffledDeck.add(randomCard);
-            } else {
-                i -= 1;
-            }
+            } //else {
+            //    i -= 1;
+            //}
         }
     }
 }

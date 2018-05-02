@@ -8,5 +8,10 @@ public class Main {
         System.out.println(testDeck.getC());
         testDeck.shuffle();
         testDeck.getNextCard();*/
+        
+        Dealer dealer = new Dealer();
+        dealer.startGame();
+        //System.out.println(dealer.getHandValue());
+        dealer.playerHitOrStand();
     }
 }
