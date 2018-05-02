@@ -1,7 +1,7 @@
 package blackjack;
 
 public class Card {
-
+//*********************Just Testing************
     private String name;
     private int cardValue;
     private String suit;
@@ -11,7 +11,7 @@ public class Card {
         this.cardValue = cardValue;
         this.suit = suit;
     }
-    
+
     public String getName() {
         return name;
     }
