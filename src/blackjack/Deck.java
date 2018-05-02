@@ -1,11 +1,17 @@
 package blackjack;
 
+
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 public class Deck {
 
     private ArrayList<Card> cards;
     private ArrayList<Card> shuffledDeck;
+    Set<Integer> used = new HashSet<>(); 
+    public static final Random gen = new Random(); 
 
     
     public Deck(){
@@ -23,9 +29,20 @@ public class Deck {
     }
     
     public Card getNextCard() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+        int newRandom;  
+        do {  
+            newRandom = gen.nextInt(52);  
+        } 
+        while (used.contains(newRandom));  
+          
+        used.add(newRandom);
+        return cards.get(newRandom);
+    }  
+      
+
+    
 
     public void shuffle() {
+    
     }
-}
+}//Deck 
