@@ -17,20 +17,19 @@ public class Dealer implements User {
     }
 
     public void startGame(){
-        System.out.println("Test");
         player = new Player();
-        System.out.println("Test");
         deck.shuffle();
-        System.out.println("Test");
         player.addCard(getNextCard());
         player.addCard(getNextCard());
         addCard(getNextCard());
-        addCard(getNextCard());
-        System.out.println("Test");        
+        addCard(getNextCard()); 
+        player.getHand();
+        System.out.printf("Player's hand value = %d\n", player.getHandValue());
+        playerHitOrStand();
     }
     
-    public void dealCard(){
-        
+    public Card dealCard(){
+        return getNextCard();
     }
     
     @Override
@@ -39,22 +38,71 @@ public class Dealer implements User {
     }
     
     public void playerHitOrStand() {
-        Boolean flag = true;
+        Boolean flag = true ;
         Scanner keyboard = new Scanner(System.in);
         
         while(flag == true){
-            System.out.println("Would you like to hit? y/n: ");
+            System.out.print("Would you like to hit? y/n: ");
             String answer = keyboard.next();
             if(answer.equals("y")){
-                Card newCard = getNextCard();
-                player.addCard(newCard);
+                player.addCard(dealCard());
                 player.getHand();
+                System.out.printf("Player's hand value = %d\n", player.getHandValue());
+                if(player.getHandValue() > 21){
+                    System.out.print("Bust! Would you like to play again? y/n ");
+                    answer = keyboard.next();
+                    if(answer.equals("y")){
+                        System.out.printf("\nStarting new game.\nShuffling Deck...\n\n");
+                        startGame();
+                    } else {
+                        System.out.println("Thanks for losing Sucka!");
+                        flag = false;
+                    }
+                }
             } else {
                 flag = false;
+                dealerPlays();
             }
         }
     }
 
+    public void dealerPlays(){
+        int handValue = getHandValue();
+        if (handValue < 17){
+            addCard(dealCard());
+            dealerPlays();
+        } else {
+            compareHands();
+        }
+    }
+    
+    public void compareHands() {
+        if (getHandValue() > 21) {
+            System.out.println("Dealer Busts! You Win!!!");
+            System.out.printf("Dealer's hand value = %d\nPlayers hand value = %d\n\n", getHandValue(), player.getHandValue());
+            playAgain();
+        } else if (getHandValue() >= player.getHandValue()){
+            System.out.printf("You lose!\nDealer's hand value = %d\nPlayers hand value = %d\n\n", getHandValue(), player.getHandValue());
+            playAgain();
+        } else {
+           System.out.printf("You win!\nDealer's hand value = %d\nPlayers hand value = %d\n\n", getHandValue(), player.getHandValue());
+            playAgain();
+        }
+    }
+    
+    public void playAgain() {
+        System.out.print("Would you like to play again? y/n ");
+        Scanner keyboard = new Scanner(System.in);
+        String answer = keyboard.next();
+        if (answer.equals("y")) {
+            System.out.printf("\nStarting new game.\nShuffling Deck...\n\n");
+            startGame();
+        } else {
+            System.out.println("Thanks for playing!");
+        }
+    }
+    
+    
     @Override
     public int getHandValue() {
         return hand.getValue();
