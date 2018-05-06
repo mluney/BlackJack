@@ -1,8 +1,6 @@
 package blackjack;
 
-import java.util.LinkedList;
-
-public class Player {
+public class Player implements User {
 
     private Hand hand;
 
@@ -10,7 +8,7 @@ public class Player {
         hand = new Hand();
     }
     
-    public void getHand(){
+    /*public void displayHand(){
         LinkedList<Card> myHand = hand.getCardsInHand();
         LinkedList<String> handInfo = new LinkedList<>();
         for(int i = 0; i < myHand.size(); i++){
@@ -23,12 +21,18 @@ public class Player {
             System.out.printf("%S of %S, ", handInfo.get(i), handInfo.get(++i));  
         }
         System.out.println();
+    }*/
+    
+    public Hand getHand(){
+        return hand;
     }
     
+    @Override
     public void addCard(Card card) {
         hand.addCard(card);
     }
 
+    @Override
     public int getHandValue() {
         return hand.getValue();
     }
