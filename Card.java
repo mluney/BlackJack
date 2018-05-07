@@ -1,6 +1,6 @@
 package blackjack;
 
-public class Card {
+public class Card { 
 //*********************Just Testing************
     private String name;
     private int cardValue;
